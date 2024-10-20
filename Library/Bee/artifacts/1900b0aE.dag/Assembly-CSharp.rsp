@@ -328,6 +328,10 @@
 -r:"E:/Program Files/2022.3.37f1/Editor/Data/NetStandard/ref/2.1.0/netstandard.dll"
 -r:"Library/PackageCache/com.unity.testtools.codecoverage@1.2.5/lib/ReportGenerator/ReportGeneratorMerged.dll"
 -r:"Library/PackageCache/com.unity.visualscripting@1.9.4/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.AI.Navigation.Editor.ConversionSystem.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.AI.Navigation.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.AI.Navigation.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.AI.Navigation.Updater.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Performance.Profile-Analyzer.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.ref.dll"
@@ -355,6 +359,9 @@
 -analyzer:"E:/Program Files/2022.3.37f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/C#/CameraController.cs"
 "Assets/C#/FloorCenter.cs"
+"Assets/C#/GridLayoutGroup3D.cs"
+"Assets/C#/Player/PMove.cs"
+"Assets/C#/Player/PRoute.cs"
 -langversion:9.0
 /deterministic
 /optimize+
