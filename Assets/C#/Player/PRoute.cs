@@ -27,6 +27,8 @@ public class PRoute : MonoBehaviour
     public event Action PlayerMoveEvent;//Player移动事件
     public bool isMove;
     
+    public float clickCooldown = 0.5f;  //点击的冷却时间
+    private float lastClickTime = 0f; //上一次点击的时间
     private IEnumerator Start()
     {
         //等待一帧，确保所有 FloorCenter 的 Start 方法都已被调用
@@ -39,9 +41,13 @@ public class PRoute : MonoBehaviour
     
     private void LateUpdate()
     {
-        if (Input.GetMouseButtonDown(0)) //鼠标左键点击
+        if (Time.time - lastClickTime >= clickCooldown)
         {
-            GetShortestPath();  
+            if (Input.GetMouseButtonDown(0)) //鼠标左键点击
+            {
+                lastClickTime = Time.time; //记录这次点击的时间
+                GetShortestPath();  
+            }
         }
     }
 
