@@ -151,10 +151,18 @@ public class PRoute : MonoBehaviour
         }
         
         //起始点==终点
-        if (_targetPos==startPos)
+        if (_targetPos == startPos) 
         {
             Debug.Log("起始点==终止点");
             return;            
+        }
+        
+        //当玩家在移动状态时
+        if (isMove)
+        {
+            //取消移动
+            isMove = false;
+            return;
         }
         
         //Debug.Log("起点位置：" + startPos.name);
@@ -225,7 +233,7 @@ public class PRoute : MonoBehaviour
 
         while (currentPoint != null && currentPoint != start) 
         {
-            Debug.Log("当前节点: " + currentPoint.name + ", 父节点: " + (currentPoint.floorItem.parentPoint != null ? currentPoint.floorItem.parentPoint.name : "null"));
+            //Debug.Log("当前节点: " + currentPoint.name + ", 父节点: " + (currentPoint.floorItem.parentPoint != null ? currentPoint.floorItem.parentPoint.name : "null"));
             path.Add(currentPoint);
             currentPoint = currentPoint.floorItem.parentPoint;
         }
