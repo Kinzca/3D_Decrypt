@@ -25,7 +25,6 @@ public class PRoute : MonoBehaviour
     private Coroutine _animatePathCoroutine; //用于跟踪当前的动画协程
 
     public event Action PlayerMoveEvent;//Player移动事件
-    public bool isMove;
     
     public float clickCooldown = 0.5f;  //点击的冷却时间
     private float lastClickTime = 0f; //上一次点击的时间
@@ -96,7 +95,11 @@ public class PRoute : MonoBehaviour
         
         var gameObject = GameObject.FindWithTag("Player");
         if (gameObject == null) return; 
+     
         var playerPos = gameObject.transform.position; // 获取玩家位置
+        
+        //清空起始点
+        startPos = null;
         
         // 将玩家位置与所有地板进行比较，选取距离最短的点作为起始点
         for (int i = 0; i < centerPoint.Count; i++)
@@ -116,6 +119,21 @@ public class PRoute : MonoBehaviour
             }
 
             startPos = centerGameObjects[index].GetComponent<FloorCenter>();
+        }
+    }
+
+    /// <summary>
+    /// 每次计算时清空父节点和其他信息
+    /// </summary>
+    private void ClearParentAndOther()
+    {
+        for (int i = 0; i < centerPoint.Count; i++)
+        {
+            var floorItem=centerGameObjects[i].GetComponent<FloorCenter>().floorItem;
+
+            floorItem.parentPoint = null;
+            floorItem.neighbourDis = 0;
+            floorItem.cost = 0;
         }
     }
     
@@ -140,10 +158,11 @@ public class PRoute : MonoBehaviour
 
     private void GetShortestPath()
     {
-        // 清空路径结点
+        //清空路径结点,和链表中所有的父节点
         _closeList.Clear();
         _openList.Clear();
         pathList.Clear();
+        ClearParentAndOther();
         
         // 获取起点和终点
         GetPlayerFloor();
@@ -163,16 +182,7 @@ public class PRoute : MonoBehaviour
             return;            
         }
         
-        //当玩家在移动状态时
-        if (isMove)
-        {
-            //取消移动
-            isMove = false;
-            return;
-        }
-        
-        //Debug.Log("起点位置：" + startPos.name);
-        //Debug.Log("目标位置：" + _targetPos.name);
+        Debug.Log("起点值为：" + startPos.name + "终点值为：" + _targetPos);
 
         // 将起点加入开启列表
         _openList.Add(startPos);
@@ -206,7 +216,7 @@ public class PRoute : MonoBehaviour
                 float newCostToNei = Manhattan(startPos.floorItem.center, neighbour.floorItem.center);
                 
                 //如果该邻居节点不在开放列表中，或者新的距离值小于原来的距离值
-                if (!_openList.Contains(neighbour) || newCostToNei < neighbour.floorItem.neighbourDis)
+                if (!_openList.Contains(neighbour) || newCostToNei <= neighbour.floorItem.neighbourDis)
                 {
                     neighbour.floorItem.neighbourDis = newCostToNei;
                     neighbour.floorItem.neighbourToTarget = Manhattan(neighbour.floorItem.center, _targetPos.floorItem.center);
@@ -237,22 +247,39 @@ public class PRoute : MonoBehaviour
         List<FloorCenter> path = new List<FloorCenter>();
         FloorCenter currentPoint = end;
 
+        if (currentPoint == null) 
+        {
+            Debug.Log("当前的end结点为null");
+        }
+        else if (currentPoint == start) 
+        {
+            Debug.Log("当前的end结点等于start结点");
+        }
+        
+        //当前结点不为空且当前结点不等于开始结点，把除起始结点以外的结点添加到链表中
         while (currentPoint != null && currentPoint != start) 
         {
-            //Debug.Log("当前节点: " + currentPoint.name + ", 父节点: " + (currentPoint.floorItem.parentPoint != null ? currentPoint.floorItem.parentPoint.name : "null"));
+            Debug.Log("当前节点: " + currentPoint.name + ", 父节点: " + (currentPoint.floorItem.parentPoint != null ? currentPoint.floorItem.parentPoint.name : "null"));
             path.Add(currentPoint);
             currentPoint = currentPoint.floorItem.parentPoint;
         }
 
+        //添加起始结点
+        path.Add(currentPoint);
+        
         path.Reverse(); // 反转路径，使其从起点到终点
 
+        for (int i = 0; i < path.Count; i++)
+        {
+            Debug.Log("链表索引：" + i + "对应物体" + path[i].name);
+        }
+        
         pathList = path;
         //Debug.Log("路径节点数量: " + path.Count);
     }
     
     public void OnPlayerMoveEvent()
     {
-        isMove = true;
         PlayerMoveEvent?.Invoke();
     }
 }
