@@ -1,6 +1,6 @@
-Base path: 'E:/Program Files/2022.3.37f1/Editor/Data', plugins path 'E:/Program Files/2022.3.37f1/Editor/Data/PlaybackEngines'
+Base path: 'D:/unt/2022.3.17f1c1/Editor/Data', plugins path 'D:/unt/2022.3.17f1c1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
 
-Unhandled exception: Protocol error - failed to read magic number. Error code 0x80000004 (Not connected). (transferred 0/4)
+Unhandled exception: Protocol error - failed to read magic number (error -2147483644, transferred 0/4)
 
 Quitting shader compiler process
