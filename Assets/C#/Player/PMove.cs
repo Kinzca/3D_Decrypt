@@ -85,7 +85,7 @@ public class PMove : MonoBehaviour
             closestIndex += 1; //选择前一个结点
         }
 
-        Debug.Log("朝向索引为" + closestIndex + "移动");
+        //Debug.Log("朝向索引为" + closestIndex + "移动");
         
         return closestIndex;
     }

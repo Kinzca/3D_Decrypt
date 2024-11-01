@@ -24,7 +24,7 @@ public class FloorCenter : MonoBehaviour
     {
         floorItem = new FloorItem();
         floorItem.neighbours = new List<FloorCenter>(); // 初始化 neighbour 列表
-
+        
         JudgeIsWalkable();
         CalculateCenter();
         StartCoroutine(FindFloorsAround());

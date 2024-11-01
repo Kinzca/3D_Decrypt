@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WalkableFloor
   - UnwalkableFloor
+  - enemy
   layers:
   - Default
   - TransparentFX

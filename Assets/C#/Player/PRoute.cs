@@ -149,10 +149,6 @@ public class PRoute : MonoBehaviour
         for (int i = 0; i < point.floorItem.neighbours.Count; i++)
         {
             FloorCenter neighbour = point.floorItem.neighbours[i];
-            
-            //if (!neighbour.floorItem.isCanWalkable || _openList.Contains(neighbour)) continue;
-            //_openList.Add(neighbour);
-            //Debug.Log("邻居节点: " + neighbour.name);
         }
     }
 
@@ -227,7 +223,7 @@ public class PRoute : MonoBehaviour
                     if (!_openList.Contains(neighbour))
                         _openList.Add(neighbour);
                     
-                    Debug.Log("设置父节点: " + neighbour.name + " 的父节点为: " + currentPoint.name);
+                    //Debug.Log("设置父节点: " + neighbour.name + " 的父节点为: " + currentPoint.name);
                 }
             }
 
@@ -259,7 +255,7 @@ public class PRoute : MonoBehaviour
         //当前结点不为空且当前结点不等于开始结点，把除起始结点以外的结点添加到链表中
         while (currentPoint != null && currentPoint != start) 
         {
-            Debug.Log("当前节点: " + currentPoint.name + ", 父节点: " + (currentPoint.floorItem.parentPoint != null ? currentPoint.floorItem.parentPoint.name : "null"));
+            //Debug.Log("当前节点: " + currentPoint.name + ", 父节点: " + (currentPoint.floorItem.parentPoint != null ? currentPoint.floorItem.parentPoint.name : "null"));
             path.Add(currentPoint);
             currentPoint = currentPoint.floorItem.parentPoint;
         }
@@ -269,16 +265,16 @@ public class PRoute : MonoBehaviour
         
         path.Reverse(); // 反转路径，使其从起点到终点
 
-        for (int i = 0; i < path.Count; i++)
-        {
-            Debug.Log("链表索引：" + i + "对应物体" + path[i].name);
-        }
+        // for (int i = 0; i < path.Count; i++)
+        // {
+        //     Debug.Log("链表索引：" + i + "对应物体" + path[i].name);
+        // }
         
         pathList = path;
         //Debug.Log("路径节点数量: " + path.Count);
     }
     
-    public void OnPlayerMoveEvent()
+    private void OnPlayerMoveEvent()
     {
         PlayerMoveEvent?.Invoke();
     }

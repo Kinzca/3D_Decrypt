@@ -46,10 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\C#\GridLayoutGroup3D.cs" />
+    <Compile Include="Assets\C#\EventCenter\CallBack.cs" />
+    <Compile Include="Assets\C#\EventCenter\EventType.cs" />
+    <Compile Include="Assets\C#\FSM\IState.cs" />
+    <Compile Include="Assets\C#\EventCenter\EventCenter.cs" />
+    <Compile Include="Assets\C#\Enemy\EWalk.cs" />
     <Compile Include="Assets\C#\CameraController.cs" />
     <Compile Include="Assets\C#\FloorCenter.cs" />
+    <Compile Include="Assets\C#\Enemy\EnemyFSM.cs" />
     <Compile Include="Assets\C#\Player\PMove.cs" />
+    <Compile Include="Assets\C#\Enemy\ETrack.cs" />
     <Compile Include="Assets\C#\Player\PRoute.cs" />
+    <Compile Include="Assets\C#\Enemy\EWait.cs" />
     <Reference Include="UnityEngine">
       <HintPath>E:\Program Files\2022.3.37f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
