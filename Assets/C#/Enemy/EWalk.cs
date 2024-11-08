@@ -64,7 +64,7 @@ public class EWalk : IState
             // 确保当前目标索引不超过位置列表的范围
             if (currentTargetIndex < _posList.Count)
             {
-                Debug.Log("当前结点索引：" + currentTargetIndex);
+                //Debug.Log("当前结点索引：" + currentTargetIndex);
                 var targetPos = _posList[currentTargetIndex];
                 targetPos.y += 0.4f;
 
