@@ -1,6 +1,5 @@
 trackSelection = true
 refreshSearchWindowsInPlayMode = false
-pickerAdvancedUI = false
 fetchPreview = true
 defaultFlags = 0
 keepOpen = false
@@ -9,6 +8,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.408DD963" = ""
+	"OpenInspectorPreview.408DD963" = "0"
+	"currentGroup.408DD963" = "all"
 }
 providers = {
 	find = {
