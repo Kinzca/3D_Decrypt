@@ -2,19 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PackageGrid : MonoBehaviour
+public class PackageGrid : MonoBehaviour,IDragHandler,IEndDragHandler
 {
     public float delayTime;
-    private Image _image;
-
+    public int id;//物品ID
+    public Image image;
+    public string name;
+    public string Description;
+    
     private void Start()
     {
-        _image = gameObject.GetComponent<Image>();
+        image = gameObject.GetComponent<Image>();
         
         PackageGridInit();
     }
+
+    #region 背包格子初始化
 
     private void PackageGridInit()
     {
@@ -23,11 +29,31 @@ public class PackageGrid : MonoBehaviour
 
     private void GridFade()
     {
-        Utility.UIFade(_image,1f,1f);
+        Utility.UIFade(image,1f,1f);
     }
 
     private IEnumerator WaitForTime(float time)
     {
         yield return new WaitForSeconds(time);
     }
+
+
+    #endregion
+
+    #region 鼠标拖拽放置事件
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        //Debug.Log("进行鼠标拖拽");
+        EventCenter.Broadcast(EventType.OnDrag,this,eventData);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        //Debug.Log("鼠标松开放置");
+        EventCenter.Broadcast(EventType.EndDrag);
+    }
+
+    #endregion
+    
 }

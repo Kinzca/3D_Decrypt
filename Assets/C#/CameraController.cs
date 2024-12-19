@@ -34,12 +34,15 @@ public class CameraController : MonoBehaviour
             offset = Quaternion.Euler(0, _currentRotation, 0) * offset; // 根据旋转后的角度计算偏移
 
             Vector3 targetPosition = player.transform.position + offset;//计算摄像机的偏移量
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);//应用移动！！！
+            //transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);//应用移动！！！
+            
+            //直接设置摄像机位置，避免滞后感
+            transform.position = targetPosition;
 
             Vector3 directionToPlayer = player.transform.position - transform.position;//计算摄像机和玩家的矢量方向
             Quaternion quaternion = Quaternion.LookRotation(directionToPlayer);//计算摄像机旋转的矢量方向
             Quaternion targetRotation = quaternion * Quaternion.Euler(rotationOffsetX, 0, 0);//应用x轴上的偏移
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);//应用旋转
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);//应用旋转
         }
     }
 
@@ -60,11 +63,18 @@ public class CameraController : MonoBehaviour
                 _targetRotation -= rotationAngle;
             }
 
-            // 计算旋转，防止旋转超过指定的角度
-            if (!Mathf.Approximately(_currentRotation, _targetRotation)) // 当当前角度还未达到目标角度时继续旋转
+            // 设置最小角度阈值
+            float minAngleDifference = 0.05f;
+
+            // 如果当前角度与目标角度的差异小于阈值，直接设置为目标角度，防止抖动效果
+            if (Mathf.Abs(_targetRotation - _currentRotation) < minAngleDifference)
+            {
+                _currentRotation = _targetRotation;
+            }
+            else
             {
                 float step = rotationSpeed * Time.deltaTime * 100f;
-                _currentRotation = Mathf.MoveTowards(_currentRotation, _targetRotation, step); // 平滑旋转，直到到达目标角度
+                _currentRotation = Mathf.MoveTowardsAngle(_currentRotation, _targetRotation, step);
             }
         }
     }

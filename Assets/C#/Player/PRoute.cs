@@ -11,6 +11,7 @@ public class PRoute : MonoBehaviour
     public FloorCenter startPos;    //玩家开始时的位置
     
     public LayerMask floorMask;     //指定碰撞的遮罩
+    
     public List<GameObject> centerGameObjects = new List<GameObject>();
     public List<Vector3> centerPoint = new List<Vector3>();
     
@@ -68,19 +69,14 @@ public class PRoute : MonoBehaviour
     // 获取当前指针指向的地板对象
     private void GetMouseFloor()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit castInfo;
-        bool isCast = Physics.Raycast(ray, out castInfo, Mathf.Infinity, floorMask);
-
-        if (isCast && !castInfo.collider.gameObject.CompareTag("UnwalkableFloor"))
+        var gameObject= Utility.GetMouseObject(floorMask, "WalkableFloor");
+        
+        if (gameObject != null) 
         {
-            _targetPos = castInfo.collider.gameObject.GetComponent<FloorCenter>();
-            //Debug.Log("目标格子: " + _targetPos.name); // 打印目标格子的名字
+            _targetPos = gameObject.GetComponent<FloorCenter>();
         }
-        else
-        {
-            _targetPos = null;
-        }
+        
+        Debug.Log("当前格子不可移动");
     }
 
 

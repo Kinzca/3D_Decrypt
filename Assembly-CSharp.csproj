@@ -47,20 +47,68 @@
   <ItemGroup>
     <Compile Include="Assets\C#\GridLayoutGroup3D.cs" />
     <Compile Include="Assets\C#\EventCenter\CallBack.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightSeeThroughOccluder.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\InputProxy.cs" />
     <Compile Include="Assets\C#\Utility.cs" />
+    <Compile Include="Assets\C#\EffectManager.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\ShaderParams.cs" />
     <Compile Include="Assets\C#\EventCenter\EventType.cs" />
     <Compile Include="Assets\C#\FSM\IState.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightProfile.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\VRCheck.cs" />
     <Compile Include="Assets\C#\EventCenter\EventCenter.cs" />
     <Compile Include="Assets\C#\Enemy\EWalk.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightEffectActions.cs" />
     <Compile Include="Assets\C#\CameraController.cs" />
     <Compile Include="Assets\C#\FloorCenter.cs" />
+    <Compile Include="Assets\C#\ItemFactory\Item.cs" />
+    <Compile Include="Assets\HighlightPlus\Demo\Scripts\SphereSelectionEventsExample.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightTrigger.cs" />
     <Compile Include="Assets\C#\UI\PackageUI.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\RenderingUtils.cs" />
+    <Compile Include="Assets\C#\SceneManager.cs" />
+    <Compile Include="Assets\C#\UI\MouseClick.cs" />
     <Compile Include="Assets\C#\UI\PackageGrid.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightEffectBlocker.cs" />
     <Compile Include="Assets\C#\Enemy\EnemyFSM.cs" />
+    <Compile Include="Assets\C#\Player\PWait.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\Misc.cs" />
+    <Compile Include="Assets\C#\UI\PackageView.cs" />
+    <Compile Include="Assets\C#\Player\PPick.cs" />
     <Compile Include="Assets\C#\Player\PMove.cs" />
     <Compile Include="Assets\C#\Enemy\ETrack.cs" />
     <Compile Include="Assets\C#\Player\PRoute.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightEffect.cs" />
+    <Compile Include="Assets\HighlightPlus\Demo\Scripts\ManualSelectionDemo.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightManager.cs" />
     <Compile Include="Assets\C#\Enemy\EWait.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightPlusRenderPassFeature.cs" />
+    <Compile Include="Assets\HighlightPlus\Demo\Scripts\SphereHighlightEventExample.cs" />
+    <Compile Include="Assets\C#\Player\PlayerFSM.cs" />
+    <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightEffectOccluderManager.cs" />
+    <Compile Include="Assets\HighlightPlus\Demo\Scripts\HitFxDemo.cs" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightIconFX.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightOverlay.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightOccluder.shader" />
+    <None Include="Assets\HighlightPlus\README.txt" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightGlow.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightTarget.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightBlurOutline.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightClearStencil.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightBlurGlow.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightAddDepth.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightSeeThroughMask.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightInnerGlow.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\CustomVertexTransform.cginc" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightMask.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightSeeThrough.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightSolidColor.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightComposeGlow.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightComposeOutline.shader" />
+    <None Include="Assets\HighlightPlusBundle\_README.txt" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightOutline.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightUIMask.shader" />
+    <None Include="Assets\HighlightPlus\Runtime\Resources\HighlightPlus\HighlightSeeThroughBorder.shader" />
     <Reference Include="UnityEngine">
       <HintPath>E:\Program Files\2022.3.37f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -685,41 +733,29 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>E:\Program Files\2022.3.37f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AI.Navigation">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Updater">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
@@ -727,26 +763,89 @@
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Updater">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AI.Navigation.Editor">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
@@ -760,11 +859,8 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>D:\DecryptGame\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

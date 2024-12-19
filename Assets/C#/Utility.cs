@@ -14,11 +14,11 @@ public static class Utility
     public static void GetAllChild(List<GameObject> childrenList,GameObject gameObject){
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
-            //子物体下还有子物体，则递归该物体下的子物体
-            if (gameObject.transform.GetChild(i).childCount > 0) 
-            {
-                GetAllChild(childrenList,gameObject.transform.GetChild(i).gameObject);
-            }
+            // //子物体下还有子物体，则递归该物体下的子物体
+            // if (gameObject.transform.GetChild(i).childCount > 0) 
+            // {
+            //     GetAllChild(childrenList,gameObject.transform.GetChild(i).gameObject);
+            // }
             childrenList.Add(gameObject.transform.GetChild(i).gameObject);
         }
     }
@@ -50,5 +50,33 @@ public static class Utility
         image.color = color;
 
         image.DOFade(endValue, endValue).SetEase(Ease.InOutSine);
+    }
+
+    /// <summary>
+    /// 获取鼠标点击的对象
+    /// </summary>
+    /// <param name="layerMask">射线层级</param>
+    /// <param name="tag">需要比较的物体的tag名</param>
+    /// <returns>返回游戏物体</returns>
+    public static GameObject GetMouseObject(LayerMask layerMask,string tag)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit castInfo;
+        bool isCast = Physics.Raycast(ray, out castInfo, Mathf.Infinity, layerMask);
+
+        // 绘制射线
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);  // 红色射线，长度为100单位
+        
+        if (isCast && castInfo.collider.gameObject.CompareTag(tag))
+        {
+            //Debug.Log("Hit object: " + castInfo.collider.gameObject.name);  // 打印射线检测到的物体
+            
+            return castInfo.collider.gameObject;
+            //Debug.Log("目标格子: " + _targetPos.name); // 打印目标格子的名字
+        }
+        else
+        {
+            return null;
+        }
     }
 }

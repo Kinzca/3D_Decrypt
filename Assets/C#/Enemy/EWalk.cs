@@ -24,7 +24,7 @@ public class EWalk : IState
     
     public void OnEnter()
     {
-        Debug.Log("进入移动状态");
+        //Debug.Log("敌人进入移动状态");
     }
 
     public void OnUpdate()
@@ -36,7 +36,7 @@ public class EWalk : IState
 
     public void OnExit()
     {
-        Debug.Log("退出移动状态");
+        //Debug.Log("敌人退出移动状态");
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ public class EWalk : IState
     /// </summary>
     private void GetPosLis()
     {
-        //如果敌人行走路径列表不为空，则直接返回；否则获取列表信息
+        //如果敌人行走路径列表为空，则直接返回；否则获取列表信息
         if (_posList == null) return;
         //如果列表长度等于_floorCenter长度，则复制完成，直接返回
         if (_posList.Count == _floorCenters.Count) return;
@@ -100,7 +100,7 @@ public class EWalk : IState
             
             if (currentTargetIndex >= 0) 
             {
-                Debug.Log("当前结点索引：" + currentTargetIndex);
+                //Debug.Log("当前结点索引：" + currentTargetIndex);
                 var targetPos = _posList[currentTargetIndex];
                 targetPos.y += 0.4f;
 

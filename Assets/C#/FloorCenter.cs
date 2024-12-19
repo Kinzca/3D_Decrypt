@@ -27,12 +27,14 @@ public class FloorCenter : MonoBehaviour
         
         JudgeIsWalkable();
         CalculateCenter();
+        
         StartCoroutine(FindFloorsAround());
     }
 
     private IEnumerator FindFloorsAround()
     {
         yield return null; // 确保其他对象的Start方法已经执行,即等待一段时间，等待初始化完成
+        
         GetFloorsAround();
     }
     
@@ -63,14 +65,15 @@ public class FloorCenter : MonoBehaviour
     private void CheckAndAddNeighbour(Vector3 direction)
     {
         float distance = 2.5f;
-        var posCenter = new Vector3(floorItem.center.x, floorItem.center.y - 0.1f, floorItem.center.z);//将地板中心向下移动，以免遮挡到其他物体
         
+        //var posCenter = new Vector3(floorItem.center.x, floorItem.center.y - 0.1f, floorItem.center.z);//将地板中心向下移动，以免遮挡到其他物体
         // 在场景视图中绘制射线
-        #if UNITY_EDITOR
-        Debug.DrawRay(posCenter, direction * distance, Color.red, 5f);
-        #endif
+        // #if UNITY_EDITOR
+        // Debug.DrawRay(posCenter, direction * distance, Color.red, 5f);
+        // #endif
         
-        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, distance))
+        //如果neighbour不包含射线投射到的物体
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, distance) && !floorItem.neighbours.Contains(hit.collider.gameObject.GetComponent<FloorCenter>()))
         {
             var neighbourCenter = hit.collider.gameObject.GetComponent<FloorCenter>();
             floorItem.neighbours.Add(neighbourCenter);
