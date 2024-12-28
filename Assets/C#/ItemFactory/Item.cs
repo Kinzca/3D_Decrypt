@@ -8,7 +8,9 @@ public class Item : MonoBehaviour
 {
     public int id;
     public string itemName;
-    public string imagePath;
+    public string imagePath;//图标路径
+    public string prefabPath;//预制体路径
     public string description;
+    public int weight;
 }
 

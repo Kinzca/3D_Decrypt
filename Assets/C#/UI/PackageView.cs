@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,10 +22,10 @@ public class PackageView : MonoBehaviour
     private void UpdateUI()
     {
         // 获取物品列表和背包格子列表
-        var itemDictionary = _playerParamenter.ItemDictionary;
+        var itemsList = _playerParamenter.itemsList;
         var gridList = _playerParamenter.package.childGrids;
 
-        if (itemDictionary == null || gridList == null)
+        if (itemsList == null || gridList == null)
         {
             Debug.LogError("物品列表或背包格子列表为空！");
             return;
@@ -32,33 +33,54 @@ public class PackageView : MonoBehaviour
         
         ClearAllGrids();
         
+        //首先对字典中的物体进行排序
+        SortItem(itemsList);
+        
         //遍历字典对字典中的元素进行提取
-        foreach (KeyValuePair<int,(string,string,string,int)> keyValue in itemDictionary)
+        foreach (var item in itemsList)
         {
-            int id = keyValue.Key;
-            (string itemName, string description, string path, int quantity) = keyValue.Value;
-
             int firstGridIndex = GetFirstGrid();
+            
             if (firstGridIndex == -1) 
             {
                 Debug.Log("背包已满，无法装载更多物品！");
             }
             
-            Debug.Log(path);
-
             //获取空格子并更新视图
             var grid = gridList[firstGridIndex];
             var packGrid = grid.GetComponent<PackageGrid>();
             if (packGrid != null)
             {
-                packGrid.id = id;
-                packGrid.name = itemName;
-                packGrid.Description = description;
+                packGrid.id = item.id;
+                packGrid.name = item.name;
+                packGrid.Description = item.description;
+                packGrid.weight = item.weight;
                 
                 //加载物品图标
-                Sprite itemSprite = Resources.Load<Sprite>(path);
+                Sprite itemSprite = Resources.Load<Sprite>(item.imagePath);
                 packGrid.image.sprite = itemSprite;
                 packGrid.image.enabled = true;//显示图标
+                //根据质量选择背景图标颜色
+                var image = packGrid.backGround.GetComponent<Image>();
+                switch (item.weight)
+                { 
+                    
+                    case 2:
+                        image.DOColor(Color.white, 0.1f);
+                        break;
+                    case 3:
+                        image.DOColor(Color.green, 0.1f);
+                        break;
+                    case 6:
+                        image.DOColor(Color.blue, 0.1f);
+                        break;
+                    case 9:
+                        image.DOColor(Color.magenta, 0.1f);
+                        break;
+                    case 0:
+                        image.DOColor(Color.white, 0.1f);
+                        break;
+                }
                 //重设颜色
                 packGrid.image.DOFade(1, 0.5f);
             }
@@ -95,6 +117,18 @@ public class PackageView : MonoBehaviour
         foreach (var grid in gridList)
         {
             var packageGrid = grid.GetComponent<PackageGrid>();
+            
+            var image = packageGrid.backGround.GetComponent<Image>();
+
+            //清空格子中数据，还原图标
+            //Debug.Log("已清空格子"+grid.name+"还原其背景颜色");
+            image.DOColor(Color.white, 0.1f);
+        
+            packageGrid.id = 0;
+            packageGrid.name = null;
+            packageGrid.weight = 0;
+            packageGrid.Description = null;
+            
             if (packageGrid != null)
             {
                 packageGrid.image.sprite = null;
@@ -102,7 +136,23 @@ public class PackageView : MonoBehaviour
             }
         }
     }
-
+    
+    private void SortItem(List<Item> item)
+    {
+        //按item4排序后转换为列表
+        var sortItems = item.OrderBy(item => item.weight).ToList();
+        
+        //清空玩家字典，重新添加
+        _playerParamenter.itemsList.Clear();
+        //Debug.Log("字典已清空,当前字典值"+_playerParamenter.itemsList.Count);
+        
+        for (int i = 0; i < sortItems.Count() ; i++)
+        {
+            _playerParamenter.itemsList.Add(sortItems[i]);  
+        }
+    }
+    
+    
     // public void DragItem(Sprite icon, Vector2 screenPosition)  
     // {  
     //     if (icon == null)  

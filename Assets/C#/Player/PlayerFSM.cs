@@ -10,8 +10,9 @@ public class PlayerParamenter
     public PackageUI package;
     public PRoute route;
     public float moveSpeed;
-    
-    public Dictionary<int,(string,string,string,int)> ItemDictionary; 
+
+    public List<Item> itemsList;
+    //public Dictionary<int,(string,string,string,int)> ItemDictionary; 
     public List<FloorCenter> floorCenters;
     
     public LayerMask objMask;
@@ -48,7 +49,7 @@ public class PlayerFSM : MonoBehaviour
          _states.Add(PlayerStateType.Wait,new PWait(this));
          _states.Add(PlayerStateType.Pick,new PPick(this));
          //初始化玩家存储物品的字典——编号、（名称、描述、图标存取的路径、数量）
-         playerParamenter.ItemDictionary = new Dictionary<int, (string, string, string, int)>();
+         playerParamenter.itemsList = new List<Item>();
          
          //初始化玩家位置
          StartCoroutine(InitPos());  
@@ -176,6 +177,7 @@ public class PlayerFSM : MonoBehaviour
         if (path == null || path.Count == 0)
         {
             Debug.Log("不可行走地块！.");
+            TransitionState(PlayerStateType.Wait);
             yield break;
         }
 

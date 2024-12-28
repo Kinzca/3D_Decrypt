@@ -395,6 +395,7 @@
 "Assets/C#/Player/PRoute.cs"
 "Assets/C#/Player/PWait.cs"
 "Assets/C#/SceneManager.cs"
+"Assets/C#/UI/GridInit.cs"
 "Assets/C#/UI/MouseClick.cs"
 "Assets/C#/UI/PackageGrid.cs"
 "Assets/C#/UI/PackageUI.cs"

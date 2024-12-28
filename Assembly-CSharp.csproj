@@ -53,6 +53,7 @@
     <Compile Include="Assets\C#\EffectManager.cs" />
     <Compile Include="Assets\HighlightPlus\Runtime\Scripts\ShaderParams.cs" />
     <Compile Include="Assets\C#\EventCenter\EventType.cs" />
+    <Compile Include="Assets\C#\UI\GridInit.cs" />
     <Compile Include="Assets\C#\FSM\IState.cs" />
     <Compile Include="Assets\HighlightPlus\Runtime\Scripts\HighlightProfile.cs" />
     <Compile Include="Assets\HighlightPlus\Runtime\Scripts\VRCheck.cs" />

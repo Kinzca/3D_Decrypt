@@ -29,12 +29,12 @@ public class PPick : IState
 
     public void OnExit()
     {
-        var itemDictionary = _playerParamenter.ItemDictionary;  
+        var itemDictionary = _playerParamenter.itemsList;  
 
         //在此处打印字典内容
         foreach (var item in itemDictionary)  
         {
-            Debug.Log($"字典包含的物品: ID={item.Key}, Name={item.Value.Item1}");  
+            Debug.Log($"字典包含的物品: ID={item.id}, Name={item.name}");  
         }  
 
         Debug.Log("玩家退出拾取状态");
@@ -68,18 +68,21 @@ public class PPick : IState
         }
         
         //如果玩家字典数量 < 背包格子数量
-        if (_playerParamenter.ItemDictionary.Count < _playerParamenter.package.childGrids.Count)  
+        if (_playerParamenter.itemsList.Count < _playerParamenter.package.childGrids.Count)  
         {
             var item = _pickupObject.GetComponent<Item>();
             var itemID = item.id;//物品ID
-         
+
+            var objFloor = GetObjFloor(_pickupObject);
+            objFloor.tag = "WalkableFloor";
+            
             //设置被点击到的物品状态关闭，同时传入该物体item的ID值
             EventCenter.Broadcast(EventType.SetActiveFalse,itemID);
             
             if (item != null)
             {
                 //向字典中添加物品信息
-                _playerParamenter.ItemDictionary.Add(item.id,(item.itemName,item.description,item.imagePath,1));
+                _playerParamenter.itemsList.Add(_pickupObject.GetComponent<Item>());
 
                 // 更新UI
                 EventCenter.Broadcast(EventType.UpdateUI);
@@ -101,36 +104,36 @@ public class PPick : IState
     }
 
     #region 物品数量管理(暂时不用)
-    
-    //增加物品数量
-    private int AddQuality(int id)
-    {
-        if (GetQualityByID(id) == 1)
-        {
-            return 1;
-        }
-        else
-        {
-            return GetQualityByID(id) + 1;
-        }
-    }
-    private int GetQualityByID(int itemId)
-    {
-        var itemDictionary = _playerParamenter.ItemDictionary;
-
-        //检查字典中是否包含指定的ID
-        if (itemDictionary.TryGetValue(itemId, out var itemData))
-        {
-            //解构获取数量
-            int quantity = itemData.Item4; //itemData的第四个元素是数量
-            return quantity;
-        }
-        else
-        {
-            Debug.LogWarning($"未找到ID为 {itemId} 的物品,向列表的该物品数量设为1");
-            return 1; // 如果未找到，返回1（或其他默认值）
-        }
-    }
+    //
+    // //增加物品数量
+    // private int AddQuality(int id)
+    // {
+    //     if (GetQualityByID(id) == 1)
+    //     {
+    //         return 1;
+    //     }
+    //     else
+    //     {
+    //         return GetQualityByID(id) + 1;
+    //     }
+    // }
+    // private int GetQualityByID(int itemId)
+    // {
+    //     var itemDictionary = _playerParamenter.itemsList;
+    //
+    //     //检查字典中是否包含指定的ID
+    //     if (itemDictionary.TryGetValue(itemId, out var itemData))
+    //     {
+    //         //解构获取数量
+    //         int quantity = itemData.Item4; //itemData的第四个元素是数量
+    //         return quantity;
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning($"未找到ID为 {itemId} 的物品,向列表的该物品数量设为1");
+    //         return 1; // 如果未找到，返回1（或其他默认值）
+    //     }
+    // }
 
     #endregion
 
@@ -171,6 +174,21 @@ public class PPick : IState
         var floor = gameObject.GetComponent<FloorCenter>();
 
         return floor.floorItem.neighbours;
+    }
+
+    #endregion
+
+    #region 获取该物体正下方的Floor，将该Floor的值改为Walkable
+    private GameObject GetObjFloor(GameObject obj)
+    {
+        float distance = 2.5f;
+
+        if (Physics.Raycast(obj.transform.position,-obj.transform.up,out RaycastHit hit,distance))
+        {
+            return hit.collider.gameObject;
+        }
+
+        return null;
     }
 
     #endregion

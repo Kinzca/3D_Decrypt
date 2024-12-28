@@ -12,6 +12,8 @@ public class PackageGrid : MonoBehaviour,IDragHandler,IEndDragHandler
     public Image image;
     public string name;
     public string Description;
+    [Header("物体权重")] public int weight;
+    [Header("所对应的物体背景")]public GameObject backGround;  
     
     private void Start()
     {
@@ -44,14 +46,14 @@ public class PackageGrid : MonoBehaviour,IDragHandler,IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log("进行鼠标拖拽");
+        Debug.Log("鼠标放置在的物体ID是："+id);
         EventCenter.Broadcast(EventType.OnDrag,this,eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         //Debug.Log("鼠标松开放置");
-        EventCenter.Broadcast(EventType.EndDrag);
+        EventCenter.Broadcast(EventType.EndDrag,eventData);
     }
 
     #endregion
